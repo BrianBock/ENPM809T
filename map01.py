@@ -15,16 +15,16 @@ def ticks2dist(ticks):
 	print(dist)
 	return dist # meters
 
-def deadReckonPlot(start_pos, ticks,ax):
-	# count ticks while moving
+def deadReckonPlot(start_pos, ticks, ax):
 
-	# convert ticks to distance
-
-
-	dist=ticks2dist(ticks)
 	startx=start_pos[0]
 	starty=start_pos[1]
 	theta=np.deg2rad(start_pos[2])
+
+	# Assume ticks were counted while moving
+
+	# convert ticks to distance
+	dist=ticks2dist(ticks)
 
 
 	new_pos=[0,0,0]
