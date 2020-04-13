@@ -41,11 +41,7 @@ def deadReckonPlot(start_pos, ticks,ax):
 	# print(start_pos[:2],new_pos[:2])
 	# print(new_pos)
 
-	plt.plot(x,y,'-')
-	plt.xlabel('Position (m)')
-	plt.ylabel('Position (m)')
-	plt.title("Where we've been")
-
+	ax.plot(x,y,'-')
 	return new_pos
 
 
@@ -65,5 +61,10 @@ if __name__ == "__main__":
 	new_pos=deadReckonPlot(start_pos,ticks,ax)
 	new_pos[2]=90
 	new_pos=deadReckonPlot(new_pos,ticks,ax)
+	new_pos[2]=180
+	new_pos=deadReckonPlot(new_pos,ticks,ax)
 
+	plt.xlabel('Position (m)')
+	plt.ylabel('Position (m)')
+	plt.title("Where we've been")
 	plt.show()
