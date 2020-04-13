@@ -1,36 +1,48 @@
 import RPi.GPIO as gpio
 import time
 
+in1=31
+in2=33
+in3=35
+in4=37
 
 def init_pins():
 	gpio.setmode(gpio.BOARD)
-	gpio.setup(31,gpio.OUT) #IN1
-	gpio.setup(33,gpio.OUT) #IN2
-	gpio.setup(35,gpio.OUT) #IN3
-	gpio.setup(37,gpio.OUT) #IN4
+	gpio.setup(in1,gpio.OUT) #IN1
+	gpio.setup(in2,gpio.OUT) #IN2
+	gpio.setup(in3,gpio.OUT) #IN3
+	gpio.setup(in4,gpio.OUT) #IN4
 	#gpio.setup(36,False)
 
 
 def gameover():
 	#set all pins low
-	gpio.setup(31 , False)
-	gpio.setup(33,False)
-	gpio.setup(35,False)
-	gpio.setup(37,False)
+	gpio.setup(in1, False)
+	gpio.setup(in2, False)
+	gpio.setup(in3, False)
+	gpio.setup(in4, False)
 	gpio.cleanup()
 
+
+def stop_wheels():
+	gpio.output(in1,False)
+	gpio.output(in2,False)
+	gpio.output(in3,False)
+	gpio.output(in4,False)
 
 
 def forward(tf):
 	# init()
 	#Left wheels
-	gpio.output(31,True)
-	gpio.output(33,False)
+	gpio.output(in1,True)
+	gpio.output(in2,False)
 	#Right Wheels
-	gpio.output(35,False)
-	gpio.output(37,True)
+	gpio.output(in3,False)
+	gpio.output(in4,True)
 	#Wait
 	time.sleep(tf)
+
+	stop_wheels()
 	#Send all pins low & cleanup
 	# gameover()
 	# gpio.cleanup()
@@ -39,13 +51,15 @@ def forward(tf):
 def reverse(tf):
 	# init()
 	#Left wheels
-	gpio.output(31,False)
-	gpio.output(33,True)
+	gpio.output(in1,False)
+	gpio.output(in2,True)
 	#Right Wheels
-	gpio.output(35,True)
-	gpio.output(37,False)
+	gpio.output(in3,True)
+	gpio.output(in4,False)
 	#Wait
 	time.sleep(tf)
+
+	stop_wheels()
 	#Send all pins low & cleanup
 	# gameover()
 	# gpio.cleanup()
@@ -55,13 +69,15 @@ def reverse(tf):
 def left(tf):
 	# init()
 	#Left wheels
-	gpio.output(31,False)
-	gpio.output(33,True)
+	gpio.output(in1,False)
+	gpio.output(in2,True)
 	#Right Wheels
-	gpio.output(35,False)
-	gpio.output(37,True)
+	gpio.output(in3,False)
+	gpio.output(in4,True)
 	#Wait
 	time.sleep(tf)
+
+	stop_wheels()
 	#Send all pins low & cleanup
 	# gameover()
 	# gpio.cleanup()
@@ -70,13 +86,15 @@ def left(tf):
 def right(tf):
 	# init()
 	#Left wheels
-	gpio.output(31,True)
-	gpio.output(33,False)
+	gpio.output(in1,True)
+	gpio.output(in2,False)
 	#Right Wheels
-	gpio.output(35,True)
-	gpio.output(37,False)
+	gpio.output(in3,True)
+	gpio.output(in4,False)
 	#Wait
 	time.sleep(tf)
+
+	stop_wheels()
 	#Send all pins low & cleanup
 	# gameover()
 	# gpio.cleanup()
