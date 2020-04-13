@@ -2,22 +2,27 @@ import RPi.GPIO as gpio
 import time
 
 
-def init():
+def init_pins():
 	gpio.setmode(gpio.BOARD)
 	gpio.setup(31,gpio.OUT) #IN1
 	gpio.setup(33,gpio.OUT) #IN2
 	gpio.setup(35,gpio.OUT) #IN3
 	gpio.setup(37,gpio.OUT) #IN4
 	#gpio.setup(36,False)
+
+
 def gameover():
 	#set all pins low
 	gpio.setup(31 , False)
 	gpio.setup(33,False)
 	gpio.setup(35,False)
 	gpio.setup(37,False)
+	gpio.cleanup()
+
+
 
 def forward(tf):
-	init()
+	# init()
 	#Left wheels
 	gpio.output(31,True)
 	gpio.output(33,False)
@@ -27,10 +32,12 @@ def forward(tf):
 	#Wait
 	time.sleep(tf)
 	#Send all pins low & cleanup
-	gameover()
-	gpio.cleanup()
+	# gameover()
+	# gpio.cleanup()
+
+
 def reverse(tf):
-	init()
+	# init()
 	#Left wheels
 	gpio.output(31,False)
 	gpio.output(33,True)
@@ -40,11 +47,13 @@ def reverse(tf):
 	#Wait
 	time.sleep(tf)
 	#Send all pins low & cleanup
-	gameover()
-	gpio.cleanup()
+	# gameover()
+	# gpio.cleanup()
+
+
 
 def left(tf):
-	init()
+	# init()
 	#Left wheels
 	gpio.output(31,False)
 	gpio.output(33,True)
@@ -54,10 +63,12 @@ def left(tf):
 	#Wait
 	time.sleep(tf)
 	#Send all pins low & cleanup
-	gameover()
-	gpio.cleanup()
+	# gameover()
+	# gpio.cleanup()
+
+
 def right(tf):
-	init()
+	# init()
 	#Left wheels
 	gpio.output(31,True)
 	gpio.output(33,False)
@@ -67,8 +78,8 @@ def right(tf):
 	#Wait
 	time.sleep(tf)
 	#Send all pins low & cleanup
-	gameover()
-	gpio.cleanup()
+	# gameover()
+	# gpio.cleanup()
 
 
 
@@ -79,7 +90,7 @@ def right(tf):
 #right(2)
 
 def key_input(event):
-	init()
+	# init_pins()
 	print("Key: " ,event)
 	key_press = event
 	tf=1

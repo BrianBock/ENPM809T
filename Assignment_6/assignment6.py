@@ -13,6 +13,9 @@ mygripper=gripper.gripper()
 #mygripper.init()
 key_press="a"
 #dcycle = "a"
+
+drive.init_pins()
+
 while not key_press == "p":
 	dcycle=input("Enter d cycle of gripper")
 	try:
@@ -29,3 +32,6 @@ while not key_press == "p":
 		drive.key_input(key_press)
 
 		#print("Distance: "+str(sodar.distance()))
+
+print("Clearing pins and exiting")
+drive.gameover()
