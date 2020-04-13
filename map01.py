@@ -13,7 +13,7 @@ def ticks2dist(ticks):
 	ticks_per_meter=ticks_per_wh_rev/(2*math.pi*wheel_radius)# ticks/meter
 	dist=ticks/ticks_per_meter
 	print(dist)
-	return dist
+	return dist # meters
 
 def deadReckonPlot(start_pos, ticks,ax):
 	# count ticks while moving
@@ -64,7 +64,7 @@ if __name__ == "__main__":
 	new_pos[2]=180
 	new_pos=deadReckonPlot(new_pos,ticks,ax)
 
-	plt.xlabel('Position (m)')
-	plt.ylabel('Position (m)')
+	plt.xlabel('X Position (m)')
+	plt.ylabel('Y Position (m)')
 	plt.title("Where we've been")
 	plt.show()
