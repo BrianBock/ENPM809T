@@ -18,17 +18,18 @@ smtpUser ='team3.14809t@gmail.com'
 smtpPass ='R@spbian'
 
 #destination Info
-toAdd = 'yashsavle@gmail.com'
+toAdd = ['mitchels@umd.edu','skotasai@umd.edu','bbock@umd.edu','yashsavle@gmail.com']
 fromAdd = smtpUser
-subject = 'Image recorder at'+ pic_time
+subject = 'Team 3.14 Assignment 7'
 msg = MIMEMultipart()
 msg['Subject']= subject
 msg['From']= fromAdd
-msg['To']= toAdd
-msg.preamble= "Image recorded at "+pic_time
+#msg['To']= toAdd
+msg['To']=",".join(toAdd)
+msg.preamble= "Assignment 7"
 
 # Email Text
-body = MIMEText("Image Recorder at " + pic_time)
+body = MIMEText("Homework Submission for Brian Bock, Yash Savle")
 msg.attach(body)
 
 # Attach image

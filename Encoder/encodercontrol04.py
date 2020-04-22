@@ -52,10 +52,10 @@ for i in range (0,100000):
 		buttonFL = int(gpio.input(7))
 		counterFL = counterFL+1
 	
-	if counterBR >= 20:
+	if counterFL >= 20:
 		pwm1.stop()
 		
-	if counterFL >=20:
+	if counterBR >=20:
 		pwm2.stop()
 
 
@@ -64,6 +64,4 @@ for i in range (0,100000):
 		print("Thanks for Playing")
 		file1.close()
 		break
-
-
 
