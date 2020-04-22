@@ -10,10 +10,12 @@ import statistics
 trig=16
 echo=18
 
-def distance():
+def init_spins():
 	gpio.setmode(gpio.BOARD)
 	gpio.setup(trig, gpio.OUT)
 	gpio.setup(echo, gpio.IN)
+
+def distance():
 
 	#Ensure output has novalue
 	gpio.output(trig, False)
@@ -39,10 +41,11 @@ def distance():
 
 	
 	# Clean up GPIO and return the distance
-	gpio.cleanup()
+	#gpio.cleanup()
 	return distance
 
 #dist = []
+#init_spins()
 #for i in range(0,10):
 #	dist.append(distance()) 
 #	time.sleep(1)
