@@ -1,6 +1,5 @@
 # Brian Bock
 # ENPM809T
-# In Class 4/6 - Encoder Plotter
 
 # Import required packages
 import matplotlib.pyplot as plt
@@ -8,15 +7,22 @@ import numpy as np
 from datetime import datetime as dtime
 import statistics
 
-BRpath="Encoder_data_2.txt"
-FLpath="Encoder_data_3.txt"
+q2_path="Encoder_data_2.txt"
+# FLpath="Encoder_data_3.txt"
 
 # Import the data
-BRdataFile = open(BRpath,"r")
-FLdataFile = open(FLpath, "r")
+q2_dataFile = open(q2_path,"r")
+# FLdataFile = open(FLpath, "r")
 
-BRdata=BRdataFile.read().splitlines()
-FLdata=FLdataFile.read().splitlines()
+q2_data=q2_dataFile.read().splitlines()
+
+BRdata=[]
+FLdata=[]
+for data in q2_data:
+	# print(data[0],data[1])
+	BRdata.append(data[0])
+	FLdata.append(data[1])
+
 
 # Convert data from string to int to prevent funky plotting
 BRint_list = list(map(int, BRdata))
@@ -45,7 +51,7 @@ plt.xlabel('Ticks')
 plt.ylabel('Front Left Encoder')
 
 
-#plt.legend()
+# plt.legend()
 plt.show()
 
 
