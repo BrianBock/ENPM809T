@@ -72,7 +72,7 @@ if __name__ == "__main__":
 	ticks = 24
 	new_pos=deadReckonPlot(new_pos,ticks,ax)
 
-
+	plt.grid()
 	plt.xlabel('X Position (cm)')
 	plt.ylabel('Y Position (cm)')
 	plt.title("Where we've been")
