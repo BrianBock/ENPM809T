@@ -3,7 +3,7 @@ import numpy as np
 
 def init():
 	gpio.setmode(gpio.BOARD)
-	gpio.setup(12, gpio.IN, pull_up_down= gpio.PUD_UP)
+	gpio.setup(7, gpio.IN, pull_up_down= gpio.PUD_UP)
 
 def gameover():
 	gpio.cleanup()
@@ -14,8 +14,8 @@ counter =np.uint64(0)
 button = int (0)
 
 while True:
-	if int(gpio.input(12) != int(button)):
-		button = int(gpio.input(12))
+	if int(gpio.input(7) != int(button)):
+		button = int(gpio.input(7))
 		counter += 1
 		print(counter)
 

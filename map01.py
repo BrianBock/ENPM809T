@@ -11,9 +11,9 @@ def ticks2dist(ticks):
 	ticks_per_wh_rev=20
 	wheel_radius=.0325 #m
 	ticks_per_meter=ticks_per_wh_rev/(2*math.pi*wheel_radius)# ticks/meter
-	dist=ticks/ticks_per_meter
-	print(dist)
-	return dist # meters
+	dist=100*ticks/ticks_per_meter
+	print(dist*100)
+	return dist # centimeters
 
 def deadReckonPlot(start_pos, ticks, ax):
 
@@ -50,21 +50,30 @@ def deadReckonPlot(start_pos, ticks, ax):
 if __name__ == "__main__":
 	x=0
 	y=0
-	theta=45
+	theta=0
 	start_pos=(x,y,theta)
 
-	ticks=100
+	ticks=72
 	
 
 	fig,ax=plt.subplots()
 
 	new_pos=deadReckonPlot(start_pos,ticks,ax)
-	new_pos[2]=90
+	new_pos[2]+=90
+	#theta = 90
+	ticks = 24
 	new_pos=deadReckonPlot(new_pos,ticks,ax)
-	new_pos[2]=180
+	new_pos[2]+=89.756
+	#theta = 92
+	ticks = 72 
+	new_pos=deadReckonPlot(new_pos,ticks,ax)
+	new_pos[2]+= 90.78
+	#theta = 89
+	ticks = 24
 	new_pos=deadReckonPlot(new_pos,ticks,ax)
 
-	plt.xlabel('X Position (m)')
-	plt.ylabel('Y Position (m)')
+
+	plt.xlabel('X Position (cm)')
+	plt.ylabel('Y Position (cm)')
 	plt.title("Where we've been")
 	plt.show()

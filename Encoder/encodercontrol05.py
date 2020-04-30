@@ -24,7 +24,7 @@ def gameover():
 
 
 
-file1 = open("Encoder_data_5.txt","a")
+file1 = open("encoder_data_rect.txt","a")
 
 
 
@@ -43,15 +43,16 @@ def forward(ticks):
 	# Initialize pwm signal to control motor
 	pwm1 = gpio.PWM(31,50)
 	pwm2 = gpio.PWM(37,50)
-	val = 22
+	val = 32
 	pwm1.start(val)
 	pwm2.start(val)
 	time.sleep(0.1)
 
 	for i in range (0,10000000):
 		print("counterBR = ",counterBR,"counterFL = ",counterFL,"BR state: ", gpio.input(12),"FL state: ", gpio.input(7))
-		file1.write(str(gpio.input(12))+str(gpio.input(7))+"\n")
-
+		#file1.write(str(gpio.input(12))+str(gpio.input(7))+"\n")
+		error = counterFL-counterBR
+		counterBR += error
 		if int(gpio.input(12) != int(buttonBR)):
 			buttonBR = int(gpio.input(12))
 			counterBR += 1
@@ -59,17 +60,23 @@ def forward(ticks):
 		if int(gpio.input(7) != int(buttonFL)):
 			buttonFL = int(gpio.input(7))
 			counterFL = counterFL+1
-		
-		if counterFL >= ticks-1:
+		error = counterFL-counterBR
+		counterBR += error
+		if counterFL >= ticks:
 			pwm1.stop()
 			
 		if counterBR >= ticks:
 			pwm2.stop()
 
 
-		if counterBR >=ticks and counterFL >= ticks-1 :	
+		if counterBR >=ticks and counterFL >= ticks :	
 			gameover()
 			print("Thanks for Playing")
+			avg = float(counterBR+counterFL)/2
+
+			dist = 100*avg/97
+			dist = int(dist)
+			file1.write(str(dist)+"\n")
 			#file1.close()
 			break
 
@@ -102,15 +109,16 @@ def reverse(ticks):
 		if int(gpio.input(7) != int(buttonFL)):
 			buttonFL = int(gpio.input(7))
 			counterFL = counterFL+1
-		
-		if counterFL >= ticks-1:
+		error = counterFL-counterBR
+		counterBR += error
+		if counterFL >= ticks:
 			pwm1.stop()
 			
 		if counterBR >= ticks:
 			pwm2.stop()
 
 
-		if counterBR >=ticks-1 and counterFL >= ticks-1 :	
+		if counterBR >=ticks and counterFL >= ticks :	
 			gameover()
 			print("Thanks for Playing")
 			#file1.close()
@@ -127,16 +135,18 @@ def left(ticks):
 	buttonFL = int(0)
 
 	# Initialize pwm signal to control motor
+	gpio.output(31, False)
+	gpio.output(35, False)
 	pwm1 = gpio.PWM(33,50)
 	pwm2 = gpio.PWM(37,50)
-	val = 42
-	pwm1.start(val)
+	val = 62
 	pwm2.start(val)
-	time.sleep(0.1)
+	#time.sleep(0.1)
+	pwm1.start(val)
 
 	for i in range (0,10000000):
 		print("counterBR = ",counterBR,"counterFL = ",counterFL,"BR state: ", gpio.input(12),"FL state: ", gpio.input(7))
-		file1.write(str(gpio.input(12))+str(gpio.input(7))+"\n")
+		#file1.write(str(gpio.input(12))+str(gpio.input(7))+"\n")
 
 		if int(gpio.input(12) != int(buttonBR)):
 			buttonBR = int(gpio.input(12))
@@ -145,16 +155,24 @@ def left(ticks):
 		if int(gpio.input(7) != int(buttonFL)):
 			buttonFL = int(gpio.input(7))
 			counterFL = counterFL+1
-		
-		if counterFL >= ticks-1:
+#		avg =  (counterBR + counterFL)/2
+		error = counterFL-counterBR
+		counterBR += error
+		if counterFL >= ticks:
 			pwm1.stop()
-			
+
 		if counterBR >= ticks:
+			#pwm1.stop()
 			pwm2.stop()
-
-
-		if counterBR >=ticks-1 and counterFL >= ticks-1 :	
+			#gameover()
+			#break
+		if  counterBR >= ticks and counterFL >= ticks :
+			pwm1.stop()
+			pwm2.stop()
 			gameover()
+			avg = float(counterBR+counterFL)/2
+			a = int(avg/0.17)
+			file1.write(str(a)+"\n")
 			print("Thanks for Playing")
 			#file1.close()
 			break
@@ -172,7 +190,7 @@ def right(ticks):
 	# Initialize pwm signal to control motor
 	pwm1 = gpio.PWM(31,50)
 	pwm2 = gpio.PWM(35,50)
-	val = 42
+	val = 62
 	pwm1.start(val)
 	pwm2.start(val)
 	time.sleep(0.1)
@@ -220,7 +238,9 @@ def key_input(event):
 	elif key_press.lower() == 'a':
 		x = input('Enter Angle in degrees:')
 		x = float(x)
-		ticks= x*0.25
+		#y =input('enter mul fac')
+		#y = float(y)
+		ticks= int(x*0.17)
 		left(ticks)
 	elif key_press.lower() == 'd':
 		x = input('Enter Angle in degrees:')
