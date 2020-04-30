@@ -59,11 +59,11 @@ if __name__ == "__main__":
 	fig,ax=plt.subplots()
 
 	new_pos=deadReckonPlot(start_pos,ticks,ax)
-	new_pos[2]+=88
+	new_pos[2]+=92
 	#theta = 90
 	ticks = 24
 	new_pos=deadReckonPlot(new_pos,ticks,ax)
-	new_pos[2]+=88
+	new_pos[2]+=91
 	#theta = 92
 	ticks = 72 
 	new_pos=deadReckonPlot(new_pos,ticks,ax)
@@ -72,7 +72,7 @@ if __name__ == "__main__":
 	ticks = 24
 	new_pos=deadReckonPlot(new_pos,ticks,ax)
 
-	plt.grid()
+
 	plt.xlabel('X Position (cm)')
 	plt.ylabel('Y Position (cm)')
 	plt.title("Where we've been")
